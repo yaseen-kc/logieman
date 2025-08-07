@@ -1,18 +1,151 @@
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { HERO_CONSTANTS } from "../../constants/heroConstants";
 import Navbar from "./navbar";
+import { useEffect, useRef, useCallback } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function HeroSection() {
   const { announcement, content, background, mockup } = HERO_CONSTANTS;
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const bgSvgRef = useRef<SVGSVGElement | null>(null);
+  const headlineRef = useRef<HTMLHeadingElement | null>(null);
+  const descriptionRef = useRef<HTMLParagraphElement | null>(null);
+  const badgeRef = useRef<HTMLDivElement | null>(null);
+  const phoneSvgRef = useRef<SVGSVGElement | null>(null);
+  const primaryBtnRef = useRef<HTMLAnchorElement | null>(null);
+  const secondaryBtnRef = useRef<HTMLAnchorElement | null>(null);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      // Initial state
+      gsap.set([headlineRef.current, descriptionRef.current, primaryBtnRef.current, secondaryBtnRef.current], {
+        opacity: 0,
+        y: 24,
+      });
+      gsap.set(badgeRef.current, { opacity: 0, y: -8 });
+      gsap.set(phoneSvgRef.current, { opacity: 0, y: 24, rotate: 0.001 });
+      gsap.set(bgSvgRef.current, { opacity: 0, y: 20 });
+
+      // Intro timeline
+      const introTl = gsap.timeline({
+        defaults: { ease: "power3.out" },
+      });
+
+      introTl
+        .to(badgeRef.current, { opacity: 1, y: 0, duration: 0.4 })
+        .to(headlineRef.current, { opacity: 1, y: 0, duration: 0.6 }, "-=0.1")
+        .to(descriptionRef.current, { opacity: 1, y: 0, duration: 0.6 }, "-=0.25")
+        .to([primaryBtnRef.current, secondaryBtnRef.current], {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.08,
+        }, "-=0.3")
+        .to(bgSvgRef.current, { opacity: 1, y: 0, duration: 0.8 }, 0)
+        .to(phoneSvgRef.current, { opacity: 1, y: 0, duration: 0.6 }, "-=0.3");
+
+      // Subtle phone float animation (continuous)
+      if (phoneSvgRef.current) {
+        gsap.to(phoneSvgRef.current, {
+          y: "-=8",
+          duration: 3,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+      }
+
+      // Scroll parallax
+      if (sectionRef.current) {
+        const scrollTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "+=80%",
+            scrub: 0.5,
+          },
+        });
+
+        scrollTl
+          .to(bgSvgRef.current, { y: -60, ease: "none" }, 0)
+          .to(phoneSvgRef.current, { y: -20, scale: 1.03, ease: "none" }, 0);
+      }
+
+      // SVG background subtle pulse on scroll enter
+      if (bgSvgRef.current) {
+        gsap.fromTo(
+          bgSvgRef.current,
+          { scale: 1 },
+          {
+            scale: 1.02,
+            transformOrigin: "50% 50%",
+            duration: 1.2,
+            ease: "power1.inOut",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 80%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => {
+      ctx.revert();
+    };
+  }, []);
+
+  const onPrimaryEnter = useCallback(() => {
+    if (!primaryBtnRef.current) return;
+    gsap.to(primaryBtnRef.current, {
+      y: -3,
+      scale: 1.03,
+      duration: 0.18,
+      ease: "power2.out",
+    });
+  }, []);
+
+  const onPrimaryLeave = useCallback(() => {
+    if (!primaryBtnRef.current) return;
+    gsap.to(primaryBtnRef.current, {
+      y: 0,
+      scale: 1,
+      duration: 0.2,
+      ease: "power2.out",
+    });
+  }, []);
+
+  const onSecondaryEnter = useCallback(() => {
+    if (!secondaryBtnRef.current) return;
+    gsap.to(secondaryBtnRef.current, {
+      x: 4,
+      duration: 0.2,
+      ease: "power2.out",
+    });
+  }, []);
+
+  const onSecondaryLeave = useCallback(() => {
+    if (!secondaryBtnRef.current) return;
+    gsap.to(secondaryBtnRef.current, {
+      x: 0,
+      duration: 0.2,
+      ease: "power2.out",
+    });
+  }, []);
 
   return (
-    <div className="bg-light">
+    <div className="bg-light" ref={sectionRef}>
       <Navbar />
       <div className="relative isolate pt-14">
         {/* Background pattern SVG */}
         <svg
           aria-hidden="true"
           className="absolute inset-0 -z-10 size-full stroke-border [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+          ref={bgSvgRef}
         >
           <defs>
             <pattern
@@ -46,7 +179,10 @@ export default function HeroSection() {
           <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
             {/* Announcement badge */}
             <div className="flex">
-              <div className="relative flex items-center gap-x-4 rounded-full bg-white px-4 py-1 text-sm/6 text-muted ring-1 ring-border hover:ring-dark/20">
+              <div
+                className="relative flex items-center gap-x-4 rounded-full bg-white px-4 py-1 text-sm/6 text-muted ring-1 ring-border hover:ring-dark/20"
+                ref={badgeRef}
+              >
                 <span className="font-semibold text-primary">
                   {announcement.badge}
                 </span>
@@ -66,12 +202,18 @@ export default function HeroSection() {
             </div>
 
             {/* Headline */}
-            <h1 className="mt-10 text-pretty text-5xl font-semibold tracking-tight text-dark sm:text-7xl">
+            <h1
+              className="mt-10 text-pretty text-5xl font-semibold tracking-tight text-dark sm:text-7xl"
+              ref={headlineRef}
+            >
               {content.headline}
             </h1>
 
             {/* Description */}
-            <p className="mt-8 text-pretty text-lg font-medium text-muted sm:text-xl/8">
+            <p
+              className="mt-8 text-pretty text-lg font-medium text-muted sm:text-xl/8"
+              ref={descriptionRef}
+            >
               {content.description}
             </p>
 
@@ -80,12 +222,18 @@ export default function HeroSection() {
               <a
                 href={content.cta.primary.href}
                 className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                ref={primaryBtnRef}
+                onMouseEnter={onPrimaryEnter}
+                onMouseLeave={onPrimaryLeave}
               >
                 {content.cta.primary.text}
               </a>
               <a
                 href={content.cta.secondary.href}
                 className="text-sm/6 font-semibold text-dark"
+                ref={secondaryBtnRef}
+                onMouseEnter={onSecondaryEnter}
+                onMouseLeave={onSecondaryLeave}
               >
                 {content.cta.secondary.text} <span aria-hidden="true">→</span>
               </a>
@@ -98,6 +246,7 @@ export default function HeroSection() {
               role="img"
               viewBox={mockup.viewBox}
               className="mx-auto w-[22.875rem] max-w-full drop-shadow-xl"
+              ref={phoneSvgRef}
             >
               <title>{mockup.imageAlt}</title>
               <defs>
