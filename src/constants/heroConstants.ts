@@ -27,7 +27,7 @@ export const HERO_CONSTANTS = {
     },
     mockup: {
         clipPathId: "2ade4387-9c63-4fc4-b754-10e687a0d332",
-        imageUrl: "src/assets/media/app-screen.jpg",
+        imageUrl: "https://yaseen-personal-work.s3.ap-south-1.amazonaws.com/media/app-screen.jpg",
         imageAlt: "App screenshot",
         viewBox: "0 0 366 729",
         clipRect: {
