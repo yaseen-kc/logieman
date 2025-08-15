@@ -14,7 +14,7 @@ export const NAV_CONSTANTS = {
     links: {
         login: {
             text: 'Log in',
-            href: '#',
+            href: 'https://dashboard.logieman.com/signin',
         },
     },
     ariaLabels: {

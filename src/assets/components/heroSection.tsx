@@ -1,6 +1,5 @@
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { HERO_CONSTANTS } from "../../constants/heroConstants";
-import Navbar from "./navbar";
 import { useEffect, useRef, useCallback } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -139,8 +138,7 @@ export default function HeroSection() {
 
   return (
     <div className="bg-light" ref={sectionRef}>
-      <Navbar />
-      <div className="relative isolate pt-14">
+      <div className="relative isolate">
         {/* Background pattern SVG */}
         <svg
           aria-hidden="true"
