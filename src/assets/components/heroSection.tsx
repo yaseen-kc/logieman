@@ -137,7 +137,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <div className="bg-light" ref={sectionRef}>
+    <div className="bg-light overflow-hidden" ref={sectionRef}>
       <div className="relative isolate">
         {/* Background pattern SVG */}
         <svg
@@ -157,7 +157,7 @@ export default function HeroSection() {
               <path d="M100 200V.5M.5 .5H200" fill="none" />
             </pattern>
           </defs>
-          <svg x="50%" y={-1} className="overflow-visible fill-light">
+          <svg x="50%" y={-1} className="overflow-hidden fill-light">
             <path
               d="M-100.5 0h201v201h-201Z M699.5 0h201v201h-201Z M499.5 400h201v201h-201Z M-300.5 600h201v201h-201Z"
               strokeWidth={0}
@@ -172,7 +172,7 @@ export default function HeroSection() {
         </svg>
 
         {/* Main content container */}
-        <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-5">
+        <div className="mx-auto max-w-7xl px-6 pt-24 pb-32 sm:pt-32 sm:pb-40 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:pb-16">
           {/* Text content */}
           <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
             {/* Announcement badge */}

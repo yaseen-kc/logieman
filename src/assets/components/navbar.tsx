@@ -1,15 +1,30 @@
-import { useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NAV_CONSTANTS } from '../../constants/navConstants'
+import { gsap } from 'gsap'
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const headerRef = useRef<HTMLElement | null>(null)
+
+  useLayoutEffect(() => {
+    if (!headerRef.current) return
+    const ctx = gsap.context(() => {
+      gsap.from(headerRef.current, {
+        y: -20,
+        opacity: 0,
+        duration: 0.5,
+        ease: 'power2.out'
+      })
+    }, headerRef)
+    return () => ctx.revert()
+  }, [])
 
   return (
-    <div className="bg-white">
-      <header className="fixed inset-x-0 top-0 z-50 bg-white/40 backdrop-blur-md border-b border-white/20 lg:bg-white lg:backdrop-blur-0 lg:border-b-0">
-        <nav aria-label={NAV_CONSTANTS.ariaLabels.global} className="mx-auto max-w-7xl flex items-center justify-between p-6 lg:px-8">
+    <div className="bg-light">
+      <header ref={headerRef} className="fixed inset-x-0 top-0 z-50 bg-light/40 backdrop-blur-md border-b border-light/20 lg:bg-light lg:backdrop-blur-0 lg:border-b-0">
+        <nav aria-label={NAV_CONSTANTS.ariaLabels.global} className="mx-auto max-w-7xl flex items-center justify-between p-3 lg:px-8">
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">{NAV_CONSTANTS.company.name}</span>

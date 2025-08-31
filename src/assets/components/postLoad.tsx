@@ -190,7 +190,7 @@ export default function PostLoad() {
   }
 
   return (
-    <section ref={sectionRef} className="bg-white">
+    <section ref={sectionRef} className="bg-light">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 items-stretch">
           {/* Left: Testimonials Slider */}
@@ -243,7 +243,7 @@ export default function PostLoad() {
                         ))}
                       </select>
                       {errors.sourceCountry && (
-                        <p className="mt-1 text-xs text-red-600">{errors.sourceCountry}</p>
+                        <p className="mt-1 text-sm text-red-600">{errors.sourceCountry}</p>
                       )}
                     </div>
                   </div>
@@ -274,7 +274,7 @@ export default function PostLoad() {
                         ))}
                       </select>
                       {errors.destinationCountry && (
-                        <p className="mt-1 text-xs text-red-600">{errors.destinationCountry}</p>
+                        <p className="mt-1 text-sm text-red-600">{errors.destinationCountry}</p>
                       )}
                     </div>
                   </div>
@@ -304,7 +304,7 @@ export default function PostLoad() {
                       className={`postload-field mt-1 block w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-dark shadow-sm focus:outline-none focus:ring-2 focus:ring-primary ${errors.weightKg ? "border-red-500 focus:ring-red-500" : ""}`}
                     />
                     {errors.weightKg && (
-                      <p className="mt-1 text-xs text-red-600">{errors.weightKg}</p>
+                      <p className="mt-1 text-sm text-red-600">{errors.weightKg}</p>
                     )}
                   </div>
 
@@ -332,7 +332,7 @@ export default function PostLoad() {
                       ))}
                     </select>
                     {errors.loadType && (
-                      <p className="mt-1 text-xs text-red-600">{errors.loadType}</p>
+                      <p className="mt-1 text-sm text-red-600">{errors.loadType}</p>
                     )}
                   </div>
 
@@ -354,7 +354,7 @@ export default function PostLoad() {
                       className={`postload-field mt-1 block w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-dark shadow-sm focus:outline-none focus:ring-2 focus:ring-primary ${errors.materialType ? "border-red-500 focus:ring-red-500" : ""}`}
                     />
                     {errors.materialType && (
-                      <p className="mt-1 text-xs text-red-600">{errors.materialType}</p>
+                      <p className="mt-1 text-sm text-red-600">{errors.materialType}</p>
                     )}
                   </div>
 
@@ -392,14 +392,14 @@ export default function PostLoad() {
                               POST_LOAD_TEXT.labels.scheduledDate
                             }
                             dateFormat="yyyy-MM-dd"
-                            className={`postload-field block w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-dark shadow-sm focus:outline-none focus:ring-2 focus:ring-primary ${errors.scheduledDate ? "border-red-500 focus:ring-red-500" : ""}`}
+                            className={`postload-field block w-full rounded-lg border border-border bg-light px-3 py-2 text-sm text-dark shadow-sm focus:outline-none focus:ring-2 focus:ring-primary ${errors.scheduledDate ? "border-red-500 focus:ring-red-500" : ""}`}
                             isClearable
                             showPopperArrow={false}
                           />
                         );
                       })()}
                       {errors.scheduledDate && (
-                        <p className="mt-1 text-xs text-red-600">{errors.scheduledDate}</p>
+                        <p className="mt-1 text-sm text-red-600">{errors.scheduledDate}</p>
                       )}
                     </div>
                   </div>
@@ -424,7 +424,7 @@ export default function PostLoad() {
                   type="submit"
                   onMouseEnter={onButtonEnter}
                   onMouseLeave={onButtonLeave}
-                  className="postload-button w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  className="w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
                   {POST_LOAD_TEXT.form.submitButton}
                 </button>
@@ -496,7 +496,7 @@ function TestimonialsSlider() {
                   />
                   <div>
                     <p className="text-white font-semibold">{t.name}</p>
-                    <p className="text-white/80 text-xs">
+                    <p className="text-white/80 text-sm">
                       {t.role} • {t.company}
                     </p>
                   </div>

@@ -3,3 +3,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    @apply font-sans overflow-x-hidden;
+  }
+  body, #root {
+    @apply overflow-x-hidden;
+  }
+}
