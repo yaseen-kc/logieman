@@ -3,7 +3,7 @@ export const HERO_CONSTANTS = {
         badge: "New Routes Available",
         link: {
             text: "View coverage areas",
-            href: "#"
+            href: "https://dashboard.logieman.com"
         }
     },
     content: {
@@ -12,11 +12,11 @@ export const HERO_CONSTANTS = {
         cta: {
             primary: {
                 text: "Get started",
-                href: "#"
+                href: "https://dashboard.logieman.com"
             },
             secondary: {
                 text: "Learn more",
-                href: "#"
+                href: "https://dashboard.logieman.com"
             }
         }
     },
@@ -27,7 +27,7 @@ export const HERO_CONSTANTS = {
     },
     mockup: {
         clipPathId: "2ade4387-9c63-4fc4-b754-10e687a0d332",
-        imageUrl: "https://yaseen-personal-work.s3.ap-south-1.amazonaws.com/media/app-screen.jpg",
+        imageUrl: "https://yaseen-personal-work.s3.ap-south-1.amazonaws.com/media/app-screen.webp",
         imageAlt: "App screenshot",
         viewBox: "0 0 366 729",
         clipRect: {

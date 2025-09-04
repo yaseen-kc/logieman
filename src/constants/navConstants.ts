@@ -7,7 +7,7 @@ export const NAV_CONSTANTS = {
     company: {
         name: 'Logieman',
         logo: {
-            src: 'https://yaseen-personal-work.s3.ap-south-1.amazonaws.com/media/logo.png',
+            src: 'https://yaseen-personal-work.s3.ap-south-1.amazonaws.com/media/app-screen.webp',
             alt: 'Logieman',
         },
     },

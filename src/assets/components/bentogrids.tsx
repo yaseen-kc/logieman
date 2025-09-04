@@ -4,8 +4,6 @@ import {
   Cog6ToothIcon,
   ShieldCheckIcon,
   UserGroupIcon,
-  MapPinIcon,
-  TruckIcon,
 } from "@heroicons/react/24/outline";
 import { useLayoutEffect, useRef, type ReactNode } from "react";
 import gsap from "gsap";
@@ -172,107 +170,78 @@ export default function BentoGrids() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {/* Intelligent Routing Engine */}
+          {/* Driver Location Tracking */}
           <BentoCard className="md:col-span-2 lg:col-span-2">
             <div className="flex flex-col justify-between gap-6 md:flex-row">
-              <div className="max-w-xl min-w-0">
-                <h3 className="mt-5 text-xl font-semibold text-dark">
-                  {BENTO.routing.title}
+              <div className="md:w-1/2 min-w-0">
+                <h3 className="mt-1 text-xl font-semibold text-dark">
+                  {BENTO.location.title}
                 </h3>
                 <p className="mt-2 text-sm text-muted">
-                  {BENTO.routing.description}
+                  {BENTO.location.description}
                 </p>
-                <button
-                  type="button"
+                <a
+                  href={BENTO.location.href}
                   className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary ring-1 ring-primary/20 transition hover:bg-primary/20"
                 >
-                  {BENTO.routing.cta}
+                  {BENTO.location.cta}
                   <ArrowRightIcon className="size-4" />
-                </button>
+                </a>
               </div>
-
-              {/* Simple flow illustration */}
-              <div className="relative isolate grow rounded-2xl bg-gradient-to-br from-secondary/5 to-primary/5 p-6 ring-1 ring-border h-64 sm:h-72 lg:h-80">
-                <div className="flex h-full flex-col items-center justify-center gap-5">
-                  <div className="flex items-center gap-6">
-                    <div className="flex size-14 items-center justify-center rounded-full bg-white ring-1 ring-border shadow-sm">
-                      <MapPinIcon className="size-6 text-primary" />
-                    </div>
-                    <ArrowRightIcon className="size-5 text-muted" />
-                    <div className="flex size-14 items-center justify-center rounded-full bg-white ring-1 ring-border shadow-sm">
-                      <Cog6ToothIcon className="size-6 text-secondary" />
-                    </div>
-                    <ArrowRightIcon className="size-5 text-muted" />
-                    <div className="flex size-14 items-center justify-center rounded-full bg-white ring-1 ring-border shadow-sm">
-                      <TruckIcon className="size-6 text-primary" />
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-16 text-xs text-dark/80">
-                    <span>{BENTO.routing.labels[0]}</span>
-                    <span>{BENTO.routing.labels[1]}</span>
-                    <span>{BENTO.routing.labels[2]}</span>
-                  </div>
-                </div>
+              <div className="md:w-1/2 flex items-center">
+                <img
+                  src={BENTO.location.imgSrc}
+                  alt={BENTO.location.title}
+                  loading="lazy"
+                  className="w-full h-auto max-h-72 md:max-h-80 object-contain"
+                />
               </div>
             </div>
           </BentoCard>
 
-          {/* Customizable Dashboards */}
+          {/* Guaranteed Quotes in 1 Hour */}
           <BentoCard>
             <div className="flex items-start justify-between">
               <div>
                 <h3 className="text-xl font-semibold text-dark flex items-center gap-2">
                   <ChartBarIcon className="size-5 text-secondary" />
-                  {BENTO.dashboards.title}
+                  {BENTO.quotes.title}
                 </h3>
                 <p className="mt-2 text-sm text-muted">
-                  {BENTO.dashboards.description}
+                  {BENTO.quotes.description}
                 </p>
               </div>
             </div>
-            <div className="mt-6 rounded-xl bg-light p-4 ring-1 ring-border">
-              {/* Mini line chart */}
-              <svg viewBox="0 0 300 100" className="w-full">
-                <polyline
-                  points="0,70 40,60 80,65 120,50 160,55 200,35 240,45 280,25"
-                  fill="none"
-                  stroke="#6366F1"
-                  strokeWidth="2"
-                />
-                <polyline
-                  points="0,85 40,80 80,82 120,70 160,74 200,60 240,62 280,50"
-                  fill="none"
-                  stroke="#FEA405"
-                  strokeWidth="2"
-                />
-              </svg>
+            <div className="mt-4">
+              <img
+                src={BENTO.quotes.imgSrc}
+                alt={BENTO.quotes.title}
+                loading="lazy"
+                className="w-full h-auto max-h-48 object-contain"
+              />
             </div>
           </BentoCard>
 
-          {/* Real-Time Collaboration */}
+          {/* We Ship Everything ! */}
           <BentoCard>
             <div className="flex items-center gap-2">
               <UserGroupIcon className="size-5 text-secondary" />
               <h3 className="text-xl font-semibold text-dark">
-                {BENTO.collaboration.title}
+                {BENTO.ship.title}
               </h3>
             </div>
-            <p className="mt-2 text-sm text-muted">
-              {BENTO.collaboration.description}
-            </p>
-            <div className="mt-6 grid grid-cols-3 gap-3">
-              {BENTO.collaboration.avatars.ids.map((n) => (
-                <img
-                  key={n}
-                  className="mx-auto size-12 rounded-full ring-2 ring-white shadow"
-                  alt={`Collaborator ${n}`}
-                  src={`${BENTO.collaboration.avatars.urlBase}${n + 10}`}
-                />
-              ))}
+            <p className="mt-2 text-sm text-muted">{BENTO.ship.description}</p>
+            <div className="mt-4">
+              <img
+                src={BENTO.ship.imgSrc}
+                alt={BENTO.ship.title}
+                loading="lazy"
+                className="w-full h-auto max-h-48 object-contain"
+              />
             </div>
           </BentoCard>
 
-          {/* Advanced Automation */}
+          {/* Advanced Automation*/}
           <BentoCard>
             <div className="flex items-center gap-2">
               <Cog6ToothIcon className="size-5 text-secondary" />
@@ -283,31 +252,34 @@ export default function BentoGrids() {
             <p className="mt-2 text-sm text-muted">
               {BENTO.automation.description}
             </p>
-            <div className="mt-5 grid grid-cols-3 gap-3 text-center text-sm text-muted">
-              {BENTO.automation.steps.map((step) => (
-                <div
-                  key={step}
-                  className="rounded-lg bg-light px-3 py-3 ring-1 ring-border"
-                >
-                  {step}
-                </div>
-              ))}
+            <div className="mt-4">
+              <img
+                src={BENTO.automation.imgSrc}
+                alt={BENTO.automation.title}
+                loading="lazy"
+                className="w-full h-auto max-h-48 object-contain"
+              />
             </div>
           </BentoCard>
 
-          {/* Advanced Security */}
+          {/* Diverse Fleet of Trucks*/}
           <BentoCard>
             <div className="flex items-center gap-2">
               <ShieldCheckIcon className="size-5 text-secondary" />
               <h3 className="text-xl font-semibold text-dark">
-                {BENTO.security.title}
+                {BENTO.diverse.title}
               </h3>
             </div>
             <p className="mt-2 text-sm text-muted">
-              {BENTO.security.description}
+              {BENTO.diverse.description}
             </p>
-            <div className="mt-6 rounded-2xl bg-gradient-to-br from-secondary/10 via-white to-primary/10 p-10 ring-1 ring-border">
-              <ShieldCheckIcon className="mx-auto size-14 text-secondary/70" />
+            <div className="mt-4">
+              <img
+                src={BENTO.diverse.imgSrc}
+                alt={BENTO.diverse.title}
+                loading="lazy"
+                className="w-full h-auto max-h-48 object-contain"
+              />
             </div>
           </BentoCard>
         </div>

@@ -1,18 +1,12 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  StarIcon,
-} from "@heroicons/react/20/solid";
 import { gsap } from "gsap";
 import {
   APP_SCREEN,
   COUNTRIES,
   LOAD_TYPES,
   POST_LOAD_TEXT,
-  TESTIMONIALS,
 } from "../../constants/postLoadConstants";
 import { createTempLoad } from "../../api/tempLoads";
 import {
@@ -193,9 +187,15 @@ export default function PostLoad() {
     <section ref={sectionRef} className="bg-light">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 items-stretch">
-          {/* Left: Testimonials Slider */}
+          {/* Left: Simple Image */}
           <div className="order-2 lg:order-1 self-stretch h-full">
-            <TestimonialsSlider />
+            <div className="relative overflow-hidden rounded-3xl border border-border bg-white shadow-sm h-full min-h-[22rem] sm:min-h-[26rem]">
+              <img
+                alt={POST_LOAD_TEXT.alt.texture}
+                src={APP_SCREEN}
+                className="size-full object-cover"
+              />
+            </div>
           </div>
 
           {/* Right: Form */}
@@ -434,124 +434,5 @@ export default function PostLoad() {
         </div>
       </div>
     </section>
-  );
-}
-
-function TestimonialsSlider() {
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const slidesRef = useRef<HTMLDivElement | null>(null);
-
-  function next() {
-    setIndex((i) => (i + 1) % TESTIMONIALS.length);
-  }
-  function prev() {
-    setIndex((i) => (i - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
-  }
-
-  useEffect(() => {
-    if (paused) return;
-    const id = setInterval(next, 5000);
-    return () => clearInterval(id);
-  }, [paused]);
-
-  // Animate horizontal sliding with GSAP
-  useEffect(() => {
-    if (!slidesRef.current) return;
-    gsap.to(slidesRef.current, {
-      xPercent: -index * 100,
-      duration: 0.55,
-      ease: "power2.out",
-    });
-  }, [index]);
-
-  return (
-    <aside
-      className="relative overflow-hidden rounded-3xl border border-border bg-white shadow-sm flex flex-col justify-end h-full min-h-[22rem] sm:min-h-[26rem]"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      aria-label={POST_LOAD_TEXT.ariaLabels.customerTestimonials}
-    >
-      {/* Background visual */}
-      <div className="absolute inset-0">
-        <img
-          alt={POST_LOAD_TEXT.alt.texture}
-          src={APP_SCREEN}
-          className="size-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/40 to-black/20" />
-      </div>
-
-      {/* Slides viewport */}
-      <div className="relative z-10 p-6 sm:p-8">
-        <div className="overflow-hidden rounded-2xl ring-1 ring-white/10 backdrop-blur">
-          <div ref={slidesRef} className="flex">
-            {TESTIMONIALS.map((t, i) => (
-              <article key={i} className="min-w-full p-6 sm:p-8">
-                <div className="flex items-center gap-4">
-                  <img
-                    src={t.avatar}
-                    alt={POST_LOAD_TEXT.ariaLabels.avatar}
-                    className="size-12 rounded-full ring-2 ring-white/60"
-                  />
-                  <div>
-                    <p className="text-white font-semibold">{t.name}</p>
-                    <p className="text-white/80 text-sm">
-                      {t.role} • {t.company}
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-4 flex items-center gap-1">
-                  {Array.from({ length: 5 }).map((_, s) => (
-                    <StarIcon
-                      key={s}
-                      className={`size-4 ${
-                        s < t.rating ? "text-yellow-400" : "text-white/30"
-                      }`}
-                    />
-                  ))}
-                </div>
-                <p className="mt-4 text-base text-white/95">“{t.quote}”</p>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        {/* Controls */}
-        <div className="mt-4 flex items-center justify-between">
-          <div className="inline-flex gap-2">
-            <button
-              type="button"
-              onClick={prev}
-              className="inline-flex items-center justify-center rounded-full bg-white/10 p-2 text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/20"
-              aria-label={POST_LOAD_TEXT.ariaLabels.previousReview}
-            >
-              <ChevronLeftIcon className="size-5" />
-            </button>
-            <button
-              type="button"
-              onClick={next}
-              className="inline-flex items-center justify-center rounded-full bg-white/10 p-2 text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/20"
-              aria-label={POST_LOAD_TEXT.ariaLabels.nextReview}
-            >
-              <ChevronRightIcon className="size-5" />
-            </button>
-          </div>
-
-          <div className="flex items-center gap-1">
-            {TESTIMONIALS.map((_, i) => (
-              <button
-                key={i}
-                aria-label={`${POST_LOAD_TEXT.ariaLabels.goToReview} ${i + 1}`}
-                onClick={() => setIndex(i)}
-                className={`h-1.5 w-6 rounded-full transition ${
-                  i === index ? "bg-white" : "bg-white/40"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </aside>
   );
 }

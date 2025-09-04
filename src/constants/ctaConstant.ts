@@ -7,7 +7,7 @@ export const CTA_CONSTANTS = {
             "Join shippers and carriers who trust us for faster matching, real-time tracking, and fewer empty miles.",
         primary: {
             label: "Get started free",
-            href: "https://dashboard.logieman.com/signup",
+            href: "https://dashboard.logieman.com",
         },
         secondary: {
             label: "Talk to sales",

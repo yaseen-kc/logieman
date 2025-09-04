@@ -4,48 +4,42 @@ export const BENTO = {
         subtitle:
             "Powerful tools to plan, track, and optimize your operations from a single dashboard.",
     },
-    
-    routing: {
-        title: "Intelligent Routing",
+
+    location: {
+        title: "Driver Location Tracking",
         description:
-            "Optimize multi-stop routes with live traffic, service windows, and vehicle constraints. Turn complex shipping data into actionable plans that cut miles and costs.",
-        cta: "Try smart planning",
-        labels: ["Orders", "Planning", "Dispatch"],
+            "Track your drivers in real time with live GPS updates. Gain visibility into routes, stops, and delivery progress to improve efficiency and customer satisfaction.",
+        cta: "Track drivers now",
+        href: "https://dashboard.logieman.com",
+        imgSrc: "https://yaseen-personal-work.s3.ap-south-1.amazonaws.com/media/bento-icons/driver-location-tracking.webp",
     },
 
-    dashboards: {
-        title: "Customizable Dashboards",
+    quotes: {
+        title: "Guaranteed Quotes in 1 Hour",
         description:
-            "Track on-time rate, capacity, costs, and exceptions with widgets you can tailor to every team.",
+            "Get fast, accurate freight quotes tailored to your needs. We guarantee a response within 1 hour so you can plan with confidence.",
+        imgSrc:"https://yaseen-personal-work.s3.ap-south-1.amazonaws.com/media/bento-icons/guaranteed-quotes-in-1-hour.webp"
     },
 
-    collaboration: {
-        title: "Real-Time Collaboration",
+    ship: {
+        title: "We Ship Everything !",
         description:
-            "Coordinate with shippers and carriers in real time to resolve exceptions faster and keep freight moving.",
-        avatars: {
-            ids: [1, 2, 3, 4, 5, 6],
-            urlBase: "https://i.pravatar.cc/80?img=",
-        },
+            "From small parcels to oversized freight, we handle it all. Our network and expertise ensure your shipments move smoothly, no matter the size or destination.",
+        imgSrc: "https://yaseen-personal-work.s3.ap-south-1.amazonaws.com/media/bento-icons/we-ship-everything.webp"
     },
 
     automation: {
         title: "Advanced Automation",
         description:
-            "Automate tendering, rate shopping, and status updates with flexible flows.",
-        steps: [
-            "Create loads",
-            "Select carrier",
-            "Dispatch",
-            "Track",
-            "Notify",
-            "Invoice",
-        ],
+            "Simplify logistics with automated workflows. From load creation to dispatch, tracking, and invoicing, save time while reducing errors.",
+        imgSrc: "https://yaseen-personal-work.s3.ap-south-1.amazonaws.com/media/bento-icons/advanced-automation.webp"
     },
 
-    security: {
-        title: "Advanced Security",
+    diverse: {
+        title: "Diverse Fleet of Trucks",
         description:
-            "Enterprise-grade encryption and role-based access keep shipment data protected.",
+            "Access a wide range of vehicles from vans to heavy-duty trucks. No matter your shipment size or type, we have the right fleet to get it delivered.",
+        imgSrc: "https://yaseen-personal-work.s3.ap-south-1.amazonaws.com/media/bento-icons/diverse-fleet-of-trucks.webp"
     },
+
 };
